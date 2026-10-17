@@ -1,0 +1,92 @@
+/* Trang web ViNet — cùng bộ màu, cỡ chữ, bo góc với app (lib/themes/app_tokens.dart).
+   Sáng / tối theo máy người xem, giống app chọn "Theo máy". */
+:root {
+  color-scheme: light dark;
+  --brand-start: #00A6FF; --brand-end: #0062D6;
+  --accent: #006AE0; --on-accent: #FFFFFF; --link: #006AE0; --accent-soft: #E6F1FF; --hero-glow: #E6F1FF;
+  --bg: #FFFFFF; --surface: #F2F4F7; --raised: #FFFFFF; --border: #D5DAE1; --divider: #E3E6EB;
+  --text: #1C1E21; --text-2: #5B6270; --text-3: #646B77;
+  --warning: #B54708; --warning-soft: #FFF4E5;
+  --radius-md: 12px; --radius-lg: 16px; --control: 52px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --link: #4DA3FF; --accent-soft: #13253F; --hero-glow: #13253F;
+    --bg: #0F1115; --surface: #1C1F24; --raised: #1C1F24; --border: #2E333B; --divider: #2E333B;
+    --text: #E8EAED; --text-2: #A0A6B0; --text-3: #8A919C;
+    --warning: #FDB022; --warning-soft: #33280F;
+  }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; line-height: 1.65; color: var(--text); min-height: 100vh;
+  /* Quầng xanh mờ ở đầu trang như màn đăng nhập của app */
+  background: radial-gradient(110% 380px at 50% 0, var(--hero-glow) 0, var(--bg) 70%) no-repeat, var(--bg);
+}
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 6px; }
+
+/* Thanh trên cùng — như thanh tiêu đề trong app: nút quay lại tròn bên trái, logo + ViNet ở giữa */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;
+  padding: 8px 16px; padding-top: max(8px, env(safe-area-inset-top));
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(12px); backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--divider);
+}
+.topbar-back {
+  width: 40px; height: 40px; border-radius: 999px; background: var(--surface); color: var(--link);
+  display: grid; place-items: center; text-decoration: none;
+}
+.topbar-back svg { width: 22px; height: 22px; }
+.topbar-title {
+  justify-self: center; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 20px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.01em;
+}
+.topbar-title img { width: 28px; height: 28px; border-radius: 7px; }
+
+/* Trang nội dung (chính sách, điều khoản) */
+.container { max-width: 720px; margin: 0 auto; padding: 28px 16px 56px; }
+.header { margin-bottom: 24px; }
+h1 { font-size: 28px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+.date { color: var(--text-2); font-size: 15px; }
+h2 { font-size: 20px; line-height: 1.3; font-weight: 600; margin: 32px 0 10px; }
+p, li { margin-bottom: 10px; }
+li::marker { color: var(--text-3); }
+strong { font-weight: 600; }
+ul { margin: 0 0 14px 22px; }
+.highlight, .warning { padding: 14px 16px; border-radius: var(--radius-lg); margin: 20px 0; }
+.highlight { background: var(--accent-soft); }
+.warning { background: var(--warning-soft); border-left: 4px solid var(--warning); }
+
+/* Chân trang chung */
+.footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--divider); color: var(--text-3); font-size: 14px; text-align: center; }
+.footer p { margin-bottom: 6px; color: var(--text-3); }
+.footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-bottom: 10px; }
+.footer nav a { color: var(--text-2); text-decoration: none; font-weight: 500; padding: 6px 0; }
+.footer nav a:hover, .footer nav a[aria-current="page"] { color: var(--link); }
+
+/* Trang chính — như màn đăng nhập của app */
+.home { max-width: 440px; margin: 0 auto; padding: 64px 16px 40px; text-align: center; }
+.home .logo { width: 104px; height: 104px; margin: 0 auto 20px; border-radius: 24px; box-shadow: 0 8px 22px rgba(0, 98, 214, .28); }
+.home .logo img { width: 100%; height: 100%; display: block; border-radius: 24px; }
+.home h1 { font-size: 34px; margin-bottom: 6px; }
+.tagline { color: var(--text-2); font-size: 17px; margin: 0 0 32px; }
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: var(--control); padding: 12px 20px; border-radius: var(--radius-md);
+  font-size: 16px; font-weight: 600; text-decoration: none; margin-bottom: 12px;
+}
+.btn-primary { background: var(--accent); color: var(--on-accent); box-shadow: 0 6px 16px rgba(0, 106, 224, .25); }
+.btn-primary[aria-disabled="true"] { opacity: .5; cursor: default; pointer-events: none; box-shadow: none; }
+.btn-secondary { background: var(--surface); color: var(--text); }
+.btn-secondary:hover { background: var(--divider); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.note { color: var(--text-3); font-size: 14px; margin: -2px 0 24px; }
+.or { display: flex; align-items: center; gap: 14px; color: var(--text-3); font-size: 13px; margin: 8px 0 20px; }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--divider); }
+@media (prefers-color-scheme: dark) { .btn-primary { box-shadow: none; } .home .logo { box-shadow: 0 8px 22px rgba(0, 0, 0, .4); } }
